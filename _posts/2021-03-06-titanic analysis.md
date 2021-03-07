@@ -13,7 +13,7 @@ thumbnail: /assets/ship-3401500_1920.png
 
 -----
 
-![타이타닉호](/assets/flying-639522_1920.jpg)
+![타이타닉호](/assets/ship-3401500_1920.png)
 
 
 
