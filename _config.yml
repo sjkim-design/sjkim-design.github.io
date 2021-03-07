@@ -9,8 +9,8 @@ exclude:
   - "/vendor/"
 
 # Site settings
-title: Sojeong kim의 데이터분석/코딩일지
-subtitle: "sojeong in Data analysis/Coding"
+title: 데이터분석/코딩일지
+subtitle: "Data analysis/Coding"
 email: sjkim00729@gmail.com
 name: Sojeong Kim
 description: >
