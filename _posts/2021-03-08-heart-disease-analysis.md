@@ -31,6 +31,10 @@ categories: analytics
 
 ## 1. 데이터 분석 문제 정의
 
+**target의 값은 death_event**이며, 심부전증으로 인한 사망을 예측하는 것이 해당 데이터의 분석 목적입니다.
+
+***
+
 핸들링에 필요한 파이썬 라이브러리인 `numpy`, `pandas` 등의 기본 라이브러리를 import하고   train/test데이터를 업로드합니다.
 
 {% highlight python %}
@@ -49,7 +53,7 @@ import seaborn as sns
 
 ### 2-1. 컬럼별 EDA
 
-###### pd.read_csv()로 csv파일 읽어들이기
+#### pd.read_csv()로 csv파일 읽어들이기
 
 {% highlight python %}
 
@@ -57,13 +61,23 @@ df = pd.read_csv('heart_failure_clinical_records_dataset.csv')
 
 {% endhighlight %}  
 
+###### 
+
 ***
 
-###### df.head(): (-5)의 경우, tail 5도 함께 
+#### df.head(): (-5)의 경우 head/tail 5 출력
 
 {% highlight python %}
 
 df.head() 
+
+|      |  age | anaemia | creatinine_phosphokinase | diabetes | ejection_fraction | high_blood_pressure | platelets | serum_creatinine | serum_sodium |  sex | smoking | time | DEATH_EVENT |
+| ---: | ---: | ------: | -----------------------: | -------: | ----------------: | ------------------: | --------: | ---------------: | -----------: | ---: | ------: | ---: | ----------: |
+|    0 |   75 |       0 |                      582 |        0 |                20 |                   1 |    265000 |              1.9 |          130 |    1 |       0 |    4 |           1 |
+|    1 |   55 |       0 |                     7861 |        0 |                38 |                   0 |    263358 |              1.1 |          136 |    1 |       0 |    6 |           1 |
+|    2 |   65 |       0 |                      146 |        0 |                20 |                   0 |    162000 |              1.3 |          129 |    1 |       1 |    7 |           1 |
+|    3 |   50 |       1 |                      111 |        0 |                20 |                   0 |    210000 |              1.9 |          137 |    1 |       0 |    7 |           1 |
+|    4 |   65 |       1 |                      160 |        1 |                20 |                   0 |    327000 |              2.7 |          116 |    0 |       0 |    8 |           1 |
 
 {% endhighlight %}  
 
@@ -79,7 +93,7 @@ df.head()
 
 ***
 
-###### df.info(): 데이터의 타입/non-null count 
+#### df.info(): 데이터의 타입/non-null count 
 
 {% highlight python %}
 
@@ -87,7 +101,7 @@ df.info()
 
 {% endhighlight %}  
 
-모든 컬럼이 non-null이며, 비워있지 않은 상태
+모든 컬럼이 non-null이며, 즉 null이 없는 상태입니다.
 
 ```
 #   Column                    Non-Null Count  Dtype  
@@ -109,7 +123,7 @@ df.info()
 
 ***
 
-###### df.describe(): 수치형 데이터의 통계
+#### df.describe(): 수치형 데이터의 통계
 
 {% highlight python %}
 
