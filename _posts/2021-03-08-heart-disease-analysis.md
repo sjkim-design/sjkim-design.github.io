@@ -1,18 +1,11 @@
-
-
-```
+---
 layout: post
 title:  "심부전증 사망자 예측"
 summary: "heart disease"
 author: KSJ
 date: '2021-03-08 09:41:00 +0900'
 categories: analytics
-
-```
-
-
-
-
+---
 
 ***
 
