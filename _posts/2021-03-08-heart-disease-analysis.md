@@ -142,9 +142,9 @@ df.describe()
 
 #### seaborn의 histplot, jointplot, pairplot
 
-수치형 데이터의 EDA는 seaborn의 histplot, jointplot, pairplot을 통해 진행할 수 있습니다.
+수치형 데이터의 EDA는 seaborn의 histplot, jointplot을 통해 진행할 수 있습니다.
 
-###### sns.histplot
+#### sns.histplot
 
 - AGE
 
@@ -240,7 +240,7 @@ sns.jointplot(x='platelets',y='creatinine_phosphokinase',hue = 'DEATH_EVENT',dat
 
 범주형은 박스플롯 계열의 boxplot(), violinplot(), swarmplot()을 사용합니다. hue 키워드를 사용하여 범주 세분화가 가능합니다.
 
-###### boxplot
+#### sns.boxplot
 
 {% highlight python %}
 
@@ -254,7 +254,7 @@ sns.boxplot(x='DEATH_EVENT',y='ejection_fraction',data=df)
 
 박스플랏의 경우, 간단하지만 여러 정보가 담겨있어 경영층과 대화할 때 많이 쓰곤합니다.
 
-###### violinplot
+#### sns.violinplot
 
 violinplot은 박스플롯의 변형으로 박스플랏 + 히스토그램 정보 + 아웃라이어의 정보를 담고 있습니다.
 
@@ -266,7 +266,7 @@ sns.violinplot(x='DEATH_EVENT',y='ejection_fraction',data=df,hue='smoking')
 
 ![hist7](/assets/kaggle/심부전증/hist7.png)
 
-###### swarmplot
+#### swarmplot
 
 swarmplot은 스캐터 , 바이올린 플랏을 합친 것으로 볼 수 있는데요. 대신 박스플랏의 통계정보는 표시되지 않습니다.
 
