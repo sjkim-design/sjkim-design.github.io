@@ -170,7 +170,7 @@ sns.histplot(data =df.loc[df['creatinine_phosphokinase'] <3000,'creatinine_phosp
 
 {% endhighlight %}  
 
-![hist1](/assets/kaggle/심부전증/hist1.png)
+![hist1](/assets/kaggle/심부전증/hist2.png)
 
 해당 그래프에서는 딱히 통계적인 특성이 드러나지는 않네요.
 
