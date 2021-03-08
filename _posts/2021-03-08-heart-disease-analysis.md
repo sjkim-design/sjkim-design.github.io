@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "심부전증 사망자 예측"
+title:  "의료데이터: 심부전증 사망자 예측"
 summary: "heart disease"
 author: KSJ
 date: '2021-03-08 09:41:00 +0900'
@@ -15,13 +15,13 @@ categories: analytics
 
 ![심부전증](/assets/brain-3017071_1920.png)
 
-
+의료데이터인 심부전증 데이터를 활용하여 DATA HANDLING, EDA, MODELING을 진행해 보려고 합니다.
 
 ## Contents
 
 1. [데이터 분석 문제 정의](#1.-데이터-분석-문제-정의)
-2. [데이터 핸들링](#2.데이터-핸들링)
-3. [데이터 EDA](3.-데이터EDA)
+2. [데이터 EDA](3.-데이터EDA)
+3. [데이터 핸들링](#2.데이터-핸들링)
 4. [모델링](#4.-모델링)
 5. [마무리](#5.-마무리)
 
@@ -31,7 +31,7 @@ categories: analytics
 
 ## 1. 데이터 분석 문제 정의
 
-핸들링에 필요한 파이썬 라이브러리인 `numpy`, `pandas` 등의 기본 라이브러리를 import하고   train/test데이터를 업로드한다.
+핸들링에 필요한 파이썬 라이브러리인 `numpy`, `pandas` 등의 기본 라이브러리를 import하고   train/test데이터를 업로드합니다.
 
 {% highlight python %}
 
@@ -45,29 +45,27 @@ import seaborn as sns
 
 {% endhighlight %}
 
+## 2.데이터 EDA
 
+### 2-1. 컬럼별 EDA
 
-## 3.데이터 EDA
-
-### - 컬럼별 EDA
+###### pd.read_csv()로 csv파일 읽어들이기
 
 {% highlight python %}
-
-\# pd.read_csv()로 csv파일 읽어들이기
 
 df = pd.read_csv('heart_failure_clinical_records_dataset.csv')
 
 {% endhighlight %}  
 
+***
 
+###### df.head(): (-5)의 경우, tail 5도 함께 
 
 {% highlight python %}
 
-df.head() # -5하면 앞 5개/뒤의 5개까지 함께
+df.head() 
 
 {% endhighlight %}  
-
-
 
 ```
 |    |   age |   anaemia |   creatinine_phosphokinase |   diabetes |   ejection_fraction |   high_blood_pressure |   platelets |   serum_creatinine |   serum_sodium |   sex |   smoking |   time |   DEATH_EVENT |
@@ -79,17 +77,17 @@ df.head() # -5하면 앞 5개/뒤의 5개까지 함께
 |  4 |    65 |         1 |                        160 |          1 |                  20 |                     0 |      327000 |                2.7 |            116 |     0 |         0 |      8 |             1 |
 ```
 
+***
 
+###### df.info(): 데이터의 타입/non-null count 
 
 {% highlight python %}
 
-\#  df.info: 데이터타입/non-null count 
-
 df.info()
 
-\# 해석: 모든 데이터가 비워있지 않은 상태
-
 {% endhighlight %}  
+
+모든 컬럼이 non-null이며, 비워있지 않은 상태
 
 ```
 #   Column                    Non-Null Count  Dtype  
@@ -109,23 +107,21 @@ df.info()
  12  DEATH_EVENT               299 non-null    int64  
 ```
 
+***
 
+###### df.describe(): 수치형 데이터의 통계
 
 {% highlight python %}
 
-\# df.describe(): 수치형 데이터의 통계
-
 df.describe()
-
-\# 해석: 0과 1로 이뤄진 변수의 mean을 보면 imbalance 상태를 볼 수 있음
-
-\# max min이 과도한지 않은가/증가세가 일정한가
-
-\# 시간과 사망은 관련이 있을 것
 
 {% endhighlight %}  
 
+이 describe에서 알 수 있는 것은 다음과 같습니다.
 
+1) 0과 1로 이뤄진 변수의 mean을 보면 imbalance 상태를 알아볼 수 있습니다.
+
+2) max min이 과도한지 않은가/증가세가 일정한가를 통해 outlier 등을 파악할 수 있습니다.
 
 ```
 |       |      age |    anaemia |   creatinine_phosphokinase |   diabetes |   ejection_fraction |   high_blood_pressure |   platelets |   serum_creatinine |   serum_sodium |        sex |   smoking |     time |   DEATH_EVENT |
@@ -140,137 +136,151 @@ df.describe()
 | max   |  95      |   1        |                   7861     |   1        |             80      |              1        |    850000   |            9.4     |      148       |   1        |   1       | 285      |       1       |
 ```
 
+***
 
-
-
-
-### - 수치형 데이터 EDA 
+### 2-2. 수치형 데이터 EDA 
 
 #### seaborn의 histplot, jointplot, pairplot
+
+수치형 데이터의 EDA는 seaborn의 histplot, jointplot, pairplot을 통해 진행할 수 있습니다.
+
+###### sns.histplot
+
+- AGE
 
 {% highlight python %}
 
 sns.histplot(x='age',data=df, hue='DEATH_EVENT', kde =True)
 
-\# 해석: 롱테일의 구조를 가지고 있는 구조
-
-\# hue 강력함: 두 개의 히스토그램으로 쪼개져있음 겹쳐있음
-
-\# 사망한 사람은 나이대가 고루 분포 / 사망하지 않은 사람은 젊은 쪽으로 몰려있음
-
 {% endhighlight %}  
 
+![hist](/assets/kaggle/심부전증/hisplot.png)
+
+histplot을 살펴보면 롱테일의 구조를 가지고 있습니다.
+
+hisplot의 hue는 강력한데요. hue에 따라 여러개의 히스토그램으로 쪼개져서 표현되고 겹치는 부분은 회색으로 표현되네요.
+
+사망한 사람은 나이대가 고루게 분포하고 사망하지 않은 사람은 젊은 쪽으로 몰려있음을 알 수 있습니다.
 
 
-{% highlight python %}
 
-sns.histplot(x='creatinine_phosphokinase',data=df)
+- creatinine_phosphokinase
 
-\#아웃라이어가 많음
+먼저, 그래프를 그려보고 outlier가 많은 경우 특정 값 이하만 추출하여
 
-{% endhighlight %}  
-
-
+다시 그래프를 그렸습니다.
 
 {% highlight python %}
 
 sns.histplot(data =df.loc[df['creatinine_phosphokinase'] <3000,'creatinine_phosphokinase'])
 
-\#통계적인 특성이 잘 드러나지 않음
-
 {% endhighlight %}  
 
+![hist1](/assets/kaggle/심부전증/hist1.png)
 
+해당 그래프에서는 딱히 통계적인 특성이 드러나지는 않네요.
+
+
+
+- ejection_fraction
+
+  histogram 중간에 비는 경우, bins가 좁아 그런 경우도 있으니, bins를 다시 조정해봅니다.
 
 {% highlight python %}
 
-\# 'ejection_fraction'
-
-\#sns.histplot(data = df, x='ejection_fraction') # 중간에 빈 경우는 bins 다시 조정
+\#sns.histplot(data = df, x='ejection_fraction') 
 
 sns.histplot(data = df, x='ejection_fraction',bins = 13,hue = 'DEATH_EVENT' ,kde =True )
 
-\# 'ejection_fraction'이 낮은 사람이 사망을 많이 함
-
 {% endhighlight %}  
 
+![hist3](/assets/kaggle/심부전증/hist3.png)
+
+ 'ejection_fraction'이 낮은 사람이 사망을 많이 하는 경향을 볼 수 있습니다.
 
 
 
+- platelets 혈소판
 
 {% highlight python %}
-
-\#혈소판 : 전체 히스토그램은 통계적으로 보이는데, 도움이 안 될듯함 death이벤트와 상관이 없어보임
 
 sns.histplot(data = df, x='platelets',bins = 13,hue = 'DEATH_EVENT' ,kde =True )
 
 {% endhighlight %}  
 
+![hist4](/assets/kaggle/심부전증/hist4.png)
 
+혈소판의 경우, 전체 히스토그램은 통계적으로 보이는데,
+
+ death이벤트와 상관성은 보이지 않는 듯 합니다.
+
+
+
+#### joint plot :히스토그램,KDE플랏, SCATTER 플랏
 
 {% highlight python %}
-
-\# 조인트 플랏: 히스토그램이나 kde플랏을 보여주고, 스캐터플랏을 보여줌 
 
 sns.jointplot(x='platelets',y='creatinine_phosphokinase',hue = 'DEATH_EVENT',data=df, alpha = 0.3)
 
-\# 뭉쳐서 판단 어려울때 알파값 조절
-
-\# 뭉쳐있어서 판단에 큰 도움은 되지 않을 듯함
-
 {% endhighlight %}  
 
+![hist5](/assets/kaggle/심부전증/hist5.png)
+
+스캐터플랏이 뭉쳐서 판단 어려울때 알파값을 조절하여
+
+투명도를 조정합니다. 대부분의 점들이 뭉쳐있어
+
+판단을 내리기는 힘들어 보입니다.
 
 
-### - 범주형 데이터 EDA
+
+### 2-3. 범주형 데이터 EDA
 
 ####  Boxplot 계열
 
+범주형은 박스플롯 계열의 boxplot(), violinplot(), swarmplot()을 사용합니다. hue 키워드를 사용하여 범주 세분화가 가능합니다.
+
+###### boxplot
+
 {% highlight python %}
-
-\# seaborn의 Boxplot 계열(boxplot(), violinplot(), swarmplot())을 사용
-
-\# Hint) hue 키워드를 사용하여 범주 세분화 가능
-
-
-
-\# 범주형은 박스플롯으로 봄
 
 sns.boxplot(x='DEATH_EVENT',y='ejection_fraction',data=df)
 
 {% endhighlight %}  
 
+![hist6](/assets/kaggle/심부전증/hist6.png)
 
+박스플랏으로 통계치를 한 눈에 보고, 아웃라이어도 볼 수 있습니다.
 
-{% highlight python %}
+박스플랏의 경우, 간단하지만 여러 정보가 담겨있어 경영층과 대화할 때 많이 쓰곤합니다.
 
-sns.boxplot(x='smoking',y='ejection_fraction',data=df)
+###### violinplot
 
-\# 흡연자의 ejection_fraction이 좁음
-
-{% endhighlight %}  
-
-
+violinplot은 박스플롯의 변형으로 박스플랏 + 히스토그램 정보 + 아웃라이어의 정보를 담고 있습니다.
 
 {% highlight python %}
 
 sns.violinplot(x='DEATH_EVENT',y='ejection_fraction',data=df,hue='smoking')
 
-\#박스플롯의 변형 -> 박스플랏 + 히스토그램 정보 + 아웃라이어 (보고할때는 박스플랏이 더 나음)
-
 {% endhighlight %}  
 
+![hist7](/assets/kaggle/심부전증/hist7.png)
 
+###### swarmplot
+
+swarmplot은 스캐터 , 바이올린 플랏을 합친 것으로 볼 수 있는데요. 대신 박스플랏의 통계정보는 표시되지 않습니다.
 
 {% highlight python %}
 
 sns.swarmplot(x='DEATH_EVENT',y='ejection_fraction',data=df,hue='smoking')
 
-\#스캐터 + 바이올린 플랏 합친 것 대신 박스플랏의 통계정보는 없음
-
 {% endhighlight %}  
 
+![hist8](/assets/kaggle/심부전증/hist8.png)
 
+
+
+## 
 
 
 
