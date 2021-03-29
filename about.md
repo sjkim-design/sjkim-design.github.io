@@ -1,18 +1,56 @@
 ---
 layout: page
-title: About
+title: AboutME
 permalink: /about/
 main_nav: true
 ---
 
 ![alt text]({{ site.baseurl }}/assets/profile-placeholder.gif "Profile Picture"){:.profile}
 
-Centrarium is a custom theme for Jekyll, made by [Ben Centra][bencentra] for his own blog. He'd be humbled if you liked it enough to use it as well! Installation and configuration instructions can be found in the [GitHub repository](https://github.com/bencentra/centrarium).
-
-This page is a good place to write about yourself, your project, your product, or whatever it is your site is for. You can replace the image above, or you can get rid of it entirely. 
-
-You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/). And you can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-[centrarium]: https://github.com/bencentra/centrarium
-[bencentra]: http://bencentra.com
-[jekyll]: https://github.com/jekyll/jekyll
+프로젝트
+1. 모델 모니터링 업무('19.7)
+(1) 업무내용
+- 마케팅 모델 모니터링(LIFT,KS통계량,지니계수,PSI,SEI 모니터링)
+(2) 성과
+- 모델 성능 파악 및 최신성 유지, 재개발이 필요한 모델 탐지
+2. 신규회원이탈예측모델 재개발 및 전산개발 ('19.8 ~ 19.11)
+(1) 업무내용
+- 신규회원이탈예측모델 재개발 및 전산개발
+- 고객마케팅팀 연회비 도래시점(고위험군) 탈회 방지 마케팅 지원
+(2) 성과
+- 7월 캠페인 기준 연회비 도래시점 탈회율 개선 (대조군 대비 M+2월 탈회율 3%p 개선)
+3. 데이터분석 기반 기사 발행 ('19.12 ~ 20.4)
+(1) 업무내용
+- 신규출시카드, 사회이슈 연계 분석 및 기사 작성
+(2) 성과
+- YTN 인터뷰 진행 등 빅데이터 브랜드 구축
+4. APP MARKETING을 위한 주력카드 타겟팅 ('20.4 ~ 20.9)
+(1) 업무내용
+- CRM 인바운드: 카드추천 우선순위 제공
+- 디지털마케팅: APP MARKETING(PUSH/개인화피드/메인팝업등)
+(2) 성과
+- 대조군 대비 클릭률 21% 향상
+- 발송대비 발급률 125% 향상
+5. 신판 이용업종 활용 앱 내 트리거마케팅으로 현금서비스 이용유도('20.4 ~ 20.9)
+(1) 업무내용
+- 현금서비스 이용 유도 trigger 마케팅 실행
+(2) 성과
+- 전체메인팝업대비 노출 대비 클릭률 2%p 
+- 월 평균 취급고 62억원
+6. 카드론VBM모델 개발 ('20.10 ~ 20.12)
+(1) 업무내용
+- 카드론불량회원예측모델
+- 모델을 통한 카드론 우불량 회원 선별 정교화
+(2) 성과
+- 디마케팅을 통한 손실방어와 한도우대를 통한 카드론 추가 취급고 확보
+- 적자회원 디마케팅을 통해 손실 방어
+7. 성과분석체계수립('21.01 ~ 21.02)
+(1) 업무내용
+- 사내 락인(LOCK IN) 서비스에 대한 성과분석 체계 수립
+- 쿼리 자동화 체계 수립
+(2) 성과
+- 사내 서비스의 이익기여도 측정을 통한 마케팅 비용 분배 효율화
+- 타겟팅 기반 마련
+8. 카드발급예측/추천모델 개발 및 deploy
+9. 상권분석(업종추천/입지 추천서비스 분석요건 수립)
+10. 타사 데이터결합 후 분석 인사이트 기사 및 보고서 
